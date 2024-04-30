@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header_top_social__menu {
+  @apply text-lg bg-[#ec4899] text-[#fff] py-1 w-8 ml-1 flex items-center justify-center rounded-sm border border-white shadow-lg cursor-pointer hover:bg-[#fff] hover:text-[#ec4899];
+}
