@@ -14,6 +14,7 @@ const contributorsRouter = require('./routes/contributorsRoutes');
 const categoriesRouter = require('./routes/categoriesRoutes');
 const blockedUserRouter = require('./routes/blockedUserRoutes');
 const postRouter = require('./routes/postRoutes');
+const assignedJobsRouter = require('./routes/assignedJobsRoutes');
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(`${rootUrl}/contributors`, contributorsRouter);
 app.use(`${rootUrl}/categories`, categoriesRouter);
 app.use(`${rootUrl}/blocks`, blockedUserRouter);
 app.use(`${rootUrl}/posts`, postRouter);
+app.use(`${rootUrl}/jobs`, assignedJobsRouter);
 
 app.all('*', (req, res, next) => {
   next(appError(`Sorry!!! cannot find ${req.originalUrl} on this server!`, 404));

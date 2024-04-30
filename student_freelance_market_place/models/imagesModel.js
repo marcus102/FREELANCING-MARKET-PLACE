@@ -41,6 +41,10 @@ const imageSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: 'Post'
     },
+    jobAssignment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'AssignedJobs'
+    },
     comment: {
       type: mongoose.Schema.ObjectId,
       ref: 'Comment'

@@ -47,9 +47,9 @@ const postSchema = new mongoose.Schema(
       type: Date,
       default: Date.now()
     },
-    updated_at: {
+    updatedAt: {
       type: Date,
-      default: Date.now()
+      default: null
     }
   },
   {
@@ -80,6 +80,12 @@ postSchema.virtual('contributors', {
   ref: 'Contributor',
   localField: '_id',
   foreignField: 'post'
+});
+
+postSchema.pre('findOneAndUpdate', function(next) {
+  this.getUpdate().updatedAt = Date.now();
+
+  next();
 });
 
 const Post = mongoose.model('Post', postSchema);

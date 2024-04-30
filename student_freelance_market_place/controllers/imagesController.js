@@ -3,6 +3,7 @@ const fs = require('fs');
 const multer = require('multer');
 const Image = require('./../models/imagesModel');
 const Post = require('../models/postModel');
+const AssignedJobs = require('../models/assignedJobsModel');
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
 const appError = require('../utils/appError');
@@ -37,7 +38,7 @@ const upload = multer({ storage: storage });
 exports.uploadImage = upload.single('image');
 
 exports.checkInfo = catchAsync(async (req, res, next) => {
-  const { post } = req.body;
+  const { post, jobAssignment } = req.body;
 
   let id;
   let DB;
@@ -45,6 +46,9 @@ exports.checkInfo = catchAsync(async (req, res, next) => {
   if (post) {
     id = post;
     DB = Post;
+  } else if (jobAssignment) {
+    id = jobAssignment;
+    DB = AssignedJobs;
   }
 
   const targetDoc = await DB.findById(id);
@@ -57,7 +61,7 @@ exports.checkInfo = catchAsync(async (req, res, next) => {
 });
 
 exports.createImage = catchAsync(async (req, res, next) => {
-  const { caption, tags, likes, privacy, user, username, post, comment } = req.body;
+  const { caption, tags, likes, privacy, user, username, post, jobAssignment, comment } = req.body;
   const { mimetype, size } = req.file;
 
   if (!req.file) {
@@ -67,7 +71,7 @@ exports.createImage = catchAsync(async (req, res, next) => {
   let updatedUsername = username;
   let imgDirectory = 'profiles';
 
-  if (post || comment) {
+  if (post || comment || jobAssignment) {
     updatedUsername = null;
     imgDirectory = 'images';
   }
@@ -83,6 +87,7 @@ exports.createImage = catchAsync(async (req, res, next) => {
     user: user,
     username: updatedUsername,
     post: post,
+    jobAssignment: jobAssignment,
     comment: comment
   });
 
@@ -157,6 +162,7 @@ exports.deleteImage = catchAsync(async (req, res, next) => {
 });
 
 exports.deletMultiplePostsImagesById = factory.deleteManyImages(Image, 'post');
+exports.deletMultipleAssignedJobsImagesById = factory.deleteManyImages(AssignedJobs, 'jobAssignment');
 
 exports.getAllImages = factory.getAll(Image);
 exports.getImage = factory.getOne(Image);

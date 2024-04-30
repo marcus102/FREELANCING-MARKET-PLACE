@@ -42,6 +42,14 @@ const userSchema = new mongoose.Schema(
         message: 'Please provide a valid phone number!'
       }
     },
+    yearsOfExperience: {
+      type: Number,
+      default: 0
+    },
+    jobsCount: {
+      type: Number,
+      default: 0
+    },
     followersCount: {
       type: Number,
       default: 0

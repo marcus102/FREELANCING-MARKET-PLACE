@@ -5,12 +5,9 @@ const categorySchema = new mongoose.Schema(
     category: {
       type: String,
       enum: [
-        'UI/UX design',
         'Programming',
         'Sotware Testing',
-        'ORM',
         'RESTful-architecture',
-        'SQL',
         'algorithm',
         'authentication',
         'backend',
@@ -93,11 +90,9 @@ const categorySchema = new mongoose.Schema(
         'secure-coding',
         'security',
         'serverless',
-        'software',
         'software-architecture',
         'sorting-algorithms',
         'smart-contracts',
-        'sql',
         'test-automation',
         'testing',
         'tools',
@@ -107,11 +102,9 @@ const categorySchema = new mongoose.Schema(
         'user-interface',
         'virtual-reality',
         'virtualization',
-        'web',
         'web-development',
         'web-frameworks',
         'web3',
-        'other',
         'all'
       ],
       default: 'all'
